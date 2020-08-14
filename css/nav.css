@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #333333;
+    background-color: #006D77;
     height: 4em;
 }
 
@@ -17,7 +17,7 @@ header {
     left: 0.3em;
     margin: 0.3em;
     font-size: 2em;
-    color: white;
+    color: #FFDDD2;
 }
 
 nav .burger {
@@ -34,7 +34,13 @@ nav .burger div {
     width: 2.5em;
     height: 0.3em;
     margin: 0.5em;
-    background-color: white;
+    background-color: #FFDDD2;
+}
+
+nav .burger .cross {
+    display: none;
+    font-size: 3em;
+    color: #FFDDD2;
 }
 
 .nav-links {
@@ -49,19 +55,19 @@ nav .burger div {
     border-top-width: 1px;
     border-top-color: grey;
     border-top-style: solid;
-    background: #333333;
+    background: #006D77;
 }
 
 .nav-links li a {
     display: block;
     font-size: 1.5em;
     text-decoration: none;
-    color: white;
+    color: #FFDDD2;
     padding: 0.5em;
 }
 
 .nav-links li a:hover {
-    background-color: yellowgreen;
+    background-color: #83C5BE;
 }
 
 .nav-active {
