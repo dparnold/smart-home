@@ -1,0 +1,47 @@
+
+.alarmp{
+    text-align: center;
+    font-size: 5rem;
+}
+.alarmform {
+    display: block;
+    font-size: 5rem;
+    padding: 1rem;
+    width: 80%;
+    margin: auto;
+    background-color: black;
+}
+
+.alarmform span{
+    font-size: 8rem;
+}
+
+.alarmform .time {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.alarmform input {
+    display: inline;
+    font-size: inherit;
+    width: 7rem;
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.alarmform .buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alarmform button {
+    display: inline;
+    margin: auto;
+    font-size: inherit;
+    background-color: black;
+    color: white;
+    border: white;
+    border-style: solid;
+    border-width: 0.2rem;
+}

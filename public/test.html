@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="css/test.css">
-</head>
-
 <body>
-<div class="container">
-    <h1>Test</h1>
-</div>
 
+<p id="output"></p>
+
+<script>
+var outputP = document.getElementById("output");
+var dir = "/api/socket";
+var res = dir.split("/")
+outputP.innerHTML = res[2];
+</script>
 
 </body>
-
 </html>

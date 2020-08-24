@@ -1,0 +1,35 @@
+
+    <div class="sockets">
+        <h1 id="feedback">Steuerung Funksteckdose</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#" class="on" onclick="turnOn()">Steckdose an</a>
+                </li>
+                <li>
+                    <a href="#" class="off" onclick="turnOff()">Steckdose aus</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        var feedback = document.getElementById("feedback");
+        function turnOn() {
+            $.ajax({
+                type: "GET",
+                url: "http://192.168.2.142:3000/api/socket/1/1",
+                success: function (result, textStatus) {
+                }
+            });
+        }
+        function turnOff() {
+            $.ajax({
+                type: "GET",
+                url: "http://192.168.2.142:3000/api/socket/1/0",
+                success: function (result) {
+
+                }
+            });
+        }
+    </script>

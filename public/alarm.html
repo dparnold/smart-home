@@ -1,1 +1,79 @@
-alarm
+
+    <p class="alarmp" id="output">Output</p>
+    <div class="alarmform">
+        <p>Alarm</p>
+        <div class="time">
+            <input type="number" id="hours" value="06" maxlength="2" size="2" max="23" min="00">
+            <span>:</span>
+            <input type="number" id="minutes" value="30" maxlength="2" size="2" max="59" min="00">
+        </div>
+        <div class="buttons">
+            <button onclick="setAlarm()">
+                Set
+            </button>
+            <button onclick="stopAlarm()">
+                Stop
+            </button>
+        </div>
+<br>
+        <div class="snooze">
+            <p>Snooze Timer</p>
+            <input type="number" id="snooze" value="06" maxlength="2" size="2" max="23" min="00">
+            <div class="buttons">
+                <button onclick="setSnooze()">
+                    Set Snooze
+                </button>
+
+            </div>
+        </div>
+
+
+        <script>
+            function setAlarm() {
+                hours = document.getElementById("hours").value;
+                minutes = document.getElementById("minutes").value;
+                var now = new Date();
+                var alarmDate = new Date();
+                alarmDate.setHours(hours);
+                alarmDate.setMinutes(minutes);
+                alarmDate.setSeconds(0);
+                if ((alarmDate.getTime() - now.getTime()) <= 0) {
+                    alarmDate.setTime(alarmDate.getTime() + 86400000);
+                }
+                difference = (alarmDate.getTime() - now.getTime()) / 1000;
+                document.getElementById("output").innerHTML = "The alarm will start in "+difference/3600+" hours.";
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.2.105:3000/api/alarm/set/" + difference,
+                    success: function (result) {
+                    }
+                });
+            }
+            function stopAlarm() {
+            	document.getElementById("output").innerHTML = "The alarm was stopped.";
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.2.142:3000/api/alarm/stop",
+                    success: function (result) {
+                    }
+                });
+            }
+            function setSnooze() {
+                snooze = document.getElementById("snooze").value;
+                document.getElementById("output").innerHTML = "The light will turn off in "+snooze+" minutes.";
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.2.142:3000/api/socket/1/1/0",
+                    success: function (result) {
+                    }
+                });
+                
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.2.142:3000/api/socket/1/0/" + snooze*60,
+                    success: function (result) {
+                    }
+                });
+            }
+        </script>
+

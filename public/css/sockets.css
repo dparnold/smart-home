@@ -1,0 +1,36 @@
+
+.sockets{
+    padding: 0.5rem;
+    width: 80%;
+    margin: auto;
+    background-color: rgb(70, 64, 64);
+}
+.sockets h1{
+    color: black;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin: 1rem;
+    padding:1rem;
+    background-color: rgb(255, 247, 234);
+}
+.sockets ul{
+    list-style: none;
+}
+.sockets li a{
+    display: block;
+text-decoration: none;
+text-align: center;
+font-size: 3em;
+margin: 1rem;
+margin-top: 1rem;
+padding-top: 1rem;
+padding-bottom: 1rem;
+color: black;
+}
+
+.sockets .on {
+    background-color: chartreuse;
+}
+.sockets .off{
+    background-color: crimson;
+}
