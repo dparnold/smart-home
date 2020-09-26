@@ -74,7 +74,7 @@ function getFile(filePath, res, page404, mimeType) {
 //a helper function to handle HTTP requests
 function requestHandler(req, res) {
 	var
-		fileName = path.basename(req.url) || 'index.html',
+		fileName = path.basename(req.url) || 'alarm.html',
 		ext = path.extname(fileName),
 		subDirname = path.dirname(req.url),
 		url = req.url.split("/"),

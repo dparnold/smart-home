@@ -1,8 +1,14 @@
-
-.alarmp{
+.message{
+    width: 100%;
+    background-color: #006D77;
+    position: absolute;
+    bottom: 3rem;
+    z-index: 1;
     text-align: center;
-    font-size: 5rem;
+    font-size: 3rem;
+
 }
+
 .alarmform {
     display: block;
     font-size: 5rem;
