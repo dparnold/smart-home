@@ -54,7 +54,8 @@
         <br>
         <div class="alarmform" id="snooze">
             <p>Snooze Timer</p>
-            <input type="number" id="snoozeInput" value="06" maxlength="2" size="2" max="23" min="00">
+            <input type="number" id="snoozeInput" value="06" maxlength="2" size="2" max="99" min="00">
+            <span>Minutes</span>
             <div class="buttons">
                 <button onclick="setSnooze()">
                     Set Snooze
@@ -66,11 +67,26 @@
 
         <script>
             var messageTime = 5000; // in ms
+            var hoursToSleep = 7.25;
+            getWakeupTime();
+
+            function getWakeupTime() {
+                let now = new Date();
+                let wakeUp = new Date();
+                wakeUp.setTime(now.getTime() + hoursToSleep * 60 * 60 * 1000);
+                document.getElementById("hours").value = pad(wakeUp.getHours(),2);
+                document.getElementById("minutes").value = pad(wakeUp.getMinutes(),2);
+            }
+            function pad(num, size) {
+                var s = num + "";
+                while (s.length < size) s = "0" + s;
+                return s;
+            }
             function setAlarm() {
                 hours = document.getElementById("hours").value;
                 minutes = document.getElementById("minutes").value;
-                var now = new Date();
-                var alarmDate = new Date();
+                let now = new Date();
+                let alarmDate = new Date();
                 alarmDate.setHours(hours);
                 alarmDate.setMinutes(minutes);
                 alarmDate.setSeconds(0);
@@ -79,7 +95,7 @@
                 }
                 difference = (alarmDate.getTime() - now.getTime()) / 1000;
                 document.getElementById("message").innerHTML = "The alarm will start in " + Math.round((difference / 3600) * 10) / 10 + " hours.";
-                setTimeout(function () {document.getElementById("message").innerHTML="";}, messageTime);
+                setTimeout(function () { document.getElementById("message").innerHTML = ""; }, messageTime);
                 $.ajax({
                     type: "GET",
                     url: "http://" + ip + "/api/alarm/set/" + difference,
@@ -89,7 +105,7 @@
             }
             function stopAlarm() {
                 document.getElementById("message").innerHTML = "The alarm was stopped.";
-                setTimeout(function () {document.getElementById("message").innerHTML="";}, messageTime);
+                setTimeout(function () { document.getElementById("message").innerHTML = ""; }, messageTime);
                 $.ajax({
                     type: "GET",
                     url: "http://" + ip + "/api/alarm/stop",
@@ -99,8 +115,8 @@
             }
             function setSnooze() {
                 snooze = document.getElementById("snoozeInput").value;
-                document.getElementById("message").innerHTML = "The light will turn off in " + snooze/1 + " minutes.";
-                setTimeout(function () {document.getElementById("message").innerHTML="";}, messageTime);
+                document.getElementById("message").innerHTML = "The light will turn off in " + snooze / 1 + " minutes.";
+                setTimeout(function () { document.getElementById("message").innerHTML = ""; }, messageTime);
                 $.ajax({
                     type: "GET",
                     url: "http://" + ip + "/api/socket/1/1/0",

@@ -1,3 +1,6 @@
+*{
+    color: #FFDDD2;
+}
 .message{
     width: 100%;
     background-color: #006D77;
@@ -9,17 +12,26 @@
 
 }
 
-.alarmform {
+.content{
     display: block;
-    font-size: 5rem;
+    text-align: center;
+}
+.alarmform {
+    display: inline-block;
+    text-align: center;
+    clear: both;
+    font-size: 3rem;
     padding: 1rem;
-    width: 80%;
-    margin: auto;
+    margin: 0 auto;
     background-color: black;
+    border: #FFDDD2;
+    border-style: solid;
+    border-width: 0.2rem;
 }
 
-.alarmform span{
-    font-size: 8rem;
+.alarmform p{
+    text-align: center;
+    font-size: 4rem;
 }
 
 .alarmform .time {
@@ -32,22 +44,20 @@
     font-size: inherit;
     width: 7rem;
     background-color: black;
-    color: white;
     border: none;
 }
 
 .alarmform .buttons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
+    text-align: center;
 }
 .alarmform button {
     display: inline;
     margin: auto;
     font-size: inherit;
     background-color: black;
-    color: white;
-    border: white;
+    border: #FFDDD2;
     border-style: solid;
     border-width: 0.2rem;
+    padding: 0.2rem;
 }
