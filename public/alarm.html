@@ -26,18 +26,20 @@
     </header>
 
 
-    <div class="message">
-        <p id="message"></p>
-    </div>
+
 
     <div id="content" class="content">
 
-
+        <div class="alarmform" id="socketbuttons">
+            <p>Light Switch</p>
+            <button onclick="turnOn()">Light On</button>
+            <button onclick="turnOff()">Light Off</button>
+        </div>
 
         <div class="alarmform" id="alarm">
-            <p>Alarm</p>
+            <p>Set Alarm</p>
             <div class="time">
-                <input type="number" id="hours" value="06" maxlength="2" size="2" max="23" min="00">
+                <input type="number" id="hours" value="06" maxlength="2" size="2" max="23" min="00" step="1">
                 <span>:</span>
                 <input type="number" id="minutes" value="30" maxlength="2" size="2" max="59" min="00">
             </div>
@@ -50,8 +52,7 @@
                 </button>
             </div>
         </div>
-        <br>
-        <br>
+ 
         <div class="alarmform" id="snooze">
             <p>Snooze Timer</p>
             <input type="number" id="snoozeInput" value="06" maxlength="2" size="2" max="99" min="00">
@@ -66,16 +67,33 @@
 
 
         <script>
-            var messageTime = 5000; // in ms
+            const MESSAGE_TIME = 3000; // in ms    
             var hoursToSleep = 7.25;
             getWakeupTime();
 
+            function turnOn() {
+                $.ajax({
+                    type: "GET",
+                    url: "http://" + ip + "/api/socket/1/1",
+                    success: function (result, textStatus) {
+                    }
+                });
+            }
+            function turnOff() {
+                $.ajax({
+                    type: "GET",
+                    url: "http://" + ip + "/api/socket/1/0",
+                    success: function (result) {
+
+                    }
+                });
+            }
             function getWakeupTime() {
                 let now = new Date();
                 let wakeUp = new Date();
                 wakeUp.setTime(now.getTime() + hoursToSleep * 60 * 60 * 1000);
-                document.getElementById("hours").value = pad(wakeUp.getHours(),2);
-                document.getElementById("minutes").value = pad(wakeUp.getMinutes(),2);
+                document.getElementById("hours").value = pad(wakeUp.getHours(), 2);
+                document.getElementById("minutes").value = pad(wakeUp.getMinutes(), 2);
             }
             function pad(num, size) {
                 var s = num + "";
@@ -93,9 +111,8 @@
                 if ((alarmDate.getTime() - now.getTime()) <= 0) {
                     alarmDate.setTime(alarmDate.getTime() + 86400000);
                 }
-                difference = (alarmDate.getTime() - now.getTime()) / 1000;
-                document.getElementById("message").innerHTML = "The alarm will start in " + Math.round((difference / 3600) * 10) / 10 + " hours.";
-                setTimeout(function () { document.getElementById("message").innerHTML = ""; }, messageTime);
+                difference = (alarmDate.getTime() - now.getTime()) / 1500;
+                sendMessage("The alarm will start in " + Math.round((difference / 3600) * 10) / 10 + " hours.",MESSAGE_TIME);
                 $.ajax({
                     type: "GET",
                     url: "http://" + ip + "/api/alarm/set/" + difference,
@@ -104,8 +121,7 @@
                 });
             }
             function stopAlarm() {
-                document.getElementById("message").innerHTML = "The alarm was stopped.";
-                setTimeout(function () { document.getElementById("message").innerHTML = ""; }, messageTime);
+                sendMessage("The alarm was stopped.","");
                 $.ajax({
                     type: "GET",
                     url: "http://" + ip + "/api/alarm/stop",
@@ -115,8 +131,7 @@
             }
             function setSnooze() {
                 snooze = document.getElementById("snoozeInput").value;
-                document.getElementById("message").innerHTML = "The light will turn off in " + snooze / 1 + " minutes.";
-                setTimeout(function () { document.getElementById("message").innerHTML = ""; }, messageTime);
+                sendMessage("The light will turn off in " + snooze / 1 + " minutes.",MESSAGE_TIME);
                 $.ajax({
                     type: "GET",
                     url: "http://" + ip + "/api/socket/1/1/0",
