@@ -67,7 +67,7 @@ nav .cross {
     cursor: pointer;
     position: fixed;
     right: 0.7rem;
-    top: 0.0rem;
+    top: -0.25rem;
     margin: 0.25rem;
 }
 

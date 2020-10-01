@@ -111,7 +111,7 @@
                 if ((alarmDate.getTime() - now.getTime()) <= 0) {
                     alarmDate.setTime(alarmDate.getTime() + 86400000);
                 }
-                difference = (alarmDate.getTime() - now.getTime()) / 1500;
+                difference = (alarmDate.getTime() - now.getTime()) / 1000;
                 sendMessage("The alarm will start in " + Math.round((difference / 3600) * 10) / 10 + " hours.",MESSAGE_TIME);
                 $.ajax({
                     type: "GET",
